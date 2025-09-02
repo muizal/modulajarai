@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenModul - Generator Modul Ajar untuk Guru</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6da7;
+            --primary-light: #6a8ec7;
+            --sd-color: #4caf50;
+            --smp-color: #2196f3;
+            --sma-color: #9c27b0;
+            --secondary: #e9ecef;
+            --accent: #28a745;
+            --danger: #dc3545;
+            --dark: #343a40;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-sd {
+            background-color: var(--sd-color);
+        }
+        
+        .btn-sd:hover {
+            background-color: #3d8b40;
+        }
+        
+        .btn-smp {
+            background-color: var(--smp-color);
+        }
+        
+        .btn-smp:hover {
+            background-color: #0b7dda;
+        }
+        
+        .btn-sma {
+            background-color: var(--sma-color);
+        }
+        
+        .btn-sma:hover {
+            background-color: #7b1fa2;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .level-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .level-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .level-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .level-card.sd {
+            border-top: 4px solid var(--sd-color);
+        }
+        
+        .level-card.smp {
+            border-top: 4px solid var(--smp-color);
+        }
+        
+        .level-card.sma {
+            border-top: 4px solid var(--sma-color);
+        }
+        
+        .level-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .sd .level-icon {
+            color: var(--sd-color);
+        }
+        
+        .smp .level-icon {
+            color: var(--smp-color);
+        }
+        
+        .sma .level-icon {
+            color: var(--sma-color);
+        }
+        
+        .features {
+            padding: 3rem 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .login-section {
+            background-color: var(--secondary);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .login-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .login-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .login-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .login-card ul {
+            text-align: left;
+            margin-bottom: 1.5rem;
+            list-style-position: inside;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .file-upload {
+            border: 2px dashed #ddd;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary);
+        }
+        
+        .file-upload p {
+            margin-top: 0.5rem;
+            color: #666;
+        }
+        
+        .dashboard {
+            padding: 2rem 0;
+        }
+        
+        .user-info {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .premium-banner {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .document-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .document-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .document-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .document-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-left: 1rem;
+        }
+        
+        .badge-sd {
+            background-color: var(--sd-color);
+            color: white;
+        }
+        
+        .badge-smp {
+            background-color: var(--smp-color);
+            color: white;
+        }
+        
+        .badge-sma {
+            background-color: var(--sma-color);
+            color: white;
+        }
+        
+        /* Pricing Section */
+        .pricing-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular::before {
+            content: 'PALING POPULER';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-bottom-left-radius: 8px;
+        }
+        
+        .pricing-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .price-period {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .pricing-features {
+            list-style-type: none;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .login-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .level-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .pricing-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-book-open"></i> GenModul
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#features">Fitur</a></li>
+                    <li><a href="#pricing">Harga</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Generator Modul Ajar Otomatis untuk Guru</h1>
+            <p>Unggah Capaian Pembelajaran Anda, dan dapatkan modul ajar lengkap secara otomatis dalam format siap cetak.</p>
+            
+            <div class="level-selector">
+                <div class="level-card sd" onclick="selectLevel('sd')">
+                    <div class="level-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>SD</h3>
+                    <p>Sekolah Dasar</p>
+                </div>
+                
+                <div class="level-card smp" onclick="selectLevel('smp')">
+                    <div class="level-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>SMP</h3>
+                    <p>Sekolah Menengah Pertama</p>
+                </div>
+                
+                <div class="level-card sma" onclick="selectLevel('sma')">
+                    <div class="level-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>SMA</h3>
+                    <p>Sekolah Menengah Atas</p>
+                </div>
+            </div>
+            
+            <a href="#login" class="btn">Mulai Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 1rem;">Fitur Unggulan</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">Website kami membantu guru menghasilkan dokumen pembelajaran lengkap secara otomatis.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Upload Capaian Pembelajaran</h3>
+                    <p>Unggah dokumen Capaian Pembelajaran dalam format PDF, dan biarkan sistem kami yang memprosesnya.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Generator Otomatis</h3>
+                    <p>Dapatkan Modul Ajar, Tujuan Pembelajaran, Alur Tujuan Pembelajaran, dan dokumen lainnya secara instan.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📥</div>
+                    <h3>Ekspor ke Word/PDF</h3>
+                    <p>Download hasilnya dalam format Microsoft Word atau PDF yang siap dicetak dalam ukuran kertas A4.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Login dengan Google</h3>
+                    <p>Akses mudah dengan akun Google Anda, dan nikmati integrasi dengan AI Gemini untuk hasil terbaik.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>Akun Trial & Premium</h3>
+                    <p>Coba fitur dasar dengan akun trial, atau upgrade ke premium untuk akses penuh semua generator.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Pembayaran Mudah</h3>
+                    <p>Proses upgrade ke premium yang cepat dan aman dengan berbagai metode pembayaran.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section class="login-section" id="login">
+        <div class="container">
+            <h2>Masuk ke Akun Anda</h2>
+            <p>Pilih jenis akun yang sesuai dengan kebutuhan Anda</p>
+            
+            <div class="login-options">
+                <div class="login-card">
+                    <h3>Akun Trial</h3>
+                    <ul>
+                        <li>Upload Capaian Pembelajaran</li>
+                        <li>Input data dasar</li>
+                        <li>Simpan hasil sementara</li>
+                        <li>Batas 3x generate</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="showLoginForm('trial')">Pilih Trial</button>
+                </div>
+                
+                <div class="login-card">
+                    <h3>Akun Premium</h3>
+                    <ul>
+                        <li>Semua fitur trial</li>
+                        <li>Generate tanpa batas</li>
+                        <li>Ekspor ke Word/PDF</li>
+                        <li>Dukungan prioritas</li>
+                    </ul>
+                    <button class="btn" onclick="showLoginForm('premium')">Pilih Premium</button>
+                </div>
+            </div>
+            
+            <!-- Login Form (initially hidden) -->
+            <div id="loginForm" class="hidden">
+                <div style="max-width: 400px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h3 id="formTitle" style="text-align: center; margin-bottom: 1.5rem;">Masuk dengan Google</h3>
+                    <p style="text-align: center; margin-bottom: 1.5rem;">Untuk keamanan dan kemudahan akses, kami menggunakan login Google</p>
+                    
+                    <div style="text-align: center;">
+                        <button class="btn" onclick="simulateGoogleLogin()" style="background-color: #4285F4; display: inline-flex; align-items: center; margin: 0 auto;">
+                            <i class="fab fa-google" style="margin-right: 10px;"></i> Masuk dengan Google
+                        </button>
+                    </div>
+                    
+                    <div id="upgradeOption" class="hidden" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee; text-align: center;">
+                        <p style="margin-bottom: 1rem;">Upgrade ke premium untuk akses penuh</p>
+                        <a href="#pricing" class="btn">Upgrade Sekarang</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="login-section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2>Pilihan Paket Premium</h2>
+            <p>Pilih paket yang paling sesuai dengan kebutuhan Anda</p>
+            
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <h3>Bulanan</h3>
+                    <div class="price">Rp 16.000<span class="price-period">/bulan</span></div>
+                    <p>Pembayaran per bulan, cocok untuk mencoba fitur premium</p>
+                    <ul class="pricing-features">
+                        <li>Akses semua fitur premium</li>
+                        <li>Generate tanpa batas</li>
+                        <li>Ekspor ke Word/PDF</li>
+                        <li>Pembayaran bulanan</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="selectPackage('monthly')">Pilih Paket</button>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <h3>3 Bulan</h3>
+                    <div class="price">Rp 45.000<span class="price-period">/3 bulan</span></div>
+                    <p>Paket hemat untuk satu semester</p>
+                    <ul class="pricing-features">
+                        <li>Akses semua fitur premium</li>
+                        <li>Generate tanpa batas</li>
+                        <li>Ekspor ke Word/PDF</li>
+                        <li>Bonus 1 minggu gratis</li>
+                        <li>Hemat 6% dibanding bulanan</li>
+                    </ul>
+                    <button class="btn" onclick="selectPackage('quarterly')">Pilih Paket</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Semester</h3>
+                    <div class="price">Rp 90.000<span class="price-period">/semester</span></div>
+                    <p>Paket paling hemat untuk satu semester penuh</p>
+                    <ul class="pricing-features">
+                        <li>Akses semua fitur premium</li>
+                        <li>Generate tanpa batas</li>
+                        <li>Ekspor ke Word/PDF</li>
+                        <li>Prioritas support</li>
+                        <li>Hemat 12% dibanding bulanan</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="selectPackage('semester')">Pilih Paket</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section (initially hidden) -->
+    <section id="dashboard" class="dashboard hidden">
+        <div class="container">
+            <div class="user-info">
+                <h2>Halo, <span id="userName">Guru</span>! <span id="userLevelBadge" class="level-badge badge-sd">SD</span></h2>
+                <p>Selamat datang di dashboard generator modul ajar Anda.</p>
+                <div id="userStatus" class="premium-banner hidden">
+                    Anda memiliki akun <strong>Premium</strong> dan dapat mengakses semua fitur.
+                </div>
+                <div id="trialStatus" class="premium-banner">
+                    Anda menggunakan akun <strong>Trial</strong>. Upgrade ke premium untuk akses penuh.
+                </div>
+            </div>
+            
+            <div style="background-color: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <h3 style="margin-bottom: 1rem;">Input Data Pembelajaran</h3>
+                
+                <div class="form-group">
+                    <label for="schoolName">Nama Sekolah</label>
+                    <input type="text" id="schoolName" placeholder="Masukkan nama sekolah">
+                </div>
+                
+                <div class="form-group">
+                    <label for="teacherName">Nama Guru</label>
+                    <input type="text" id="teacherName" placeholder="Masukkan nama lengkap guru">
+                </div>
+                
+                <div class="form-group">
+                    <label for="educationLevel">Jenjang Pendidikan</label>
+                    <select id="educationLevel" onchange="updateClassOptions()">
+                        <option value="sd">Sekolah Dasar (SD)</option>
+                        <option value="smp">Sekolah Menengah Pertama (SMP)</option>
+                        <option value="sma">Sekolah Menengah Atas (SMA)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="class">Kelas yang Diampu</label>
+                    <select id="class">
+                        <option value="">Pilih Kelas</option>
+                        <option value="1">Kelas 1</option>
+                        <option value="2">Kelas 2</option>
+                        <option value="3">Kelas 3</option>
+                        <option value="4">Kelas 4</option>
+                        <option value="5">Kelas 5</option>
+                        <option value="6">Kelas 6</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Mata Pelajaran</label>
+                    <input type="text" id="subject" placeholder="Masukkan mata pelajaran">
+                </div>
+                
+                <div class="form-group">
+                    <label for="semester">Semester</label>
+                    <select id="semester">
+                        <option value="">Pilih Semester</option>
+                        <option value="ganjil">Ganjil</option>
+                        <option value="genap">Genap</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Upload Capaian Pembelajaran (PDF)</label>
+                    <div class="file-upload" id="fileUploadArea">
+                        <div style="font-size: 3rem;">📁</div>
+                        <p>Klik untuk upload file PDF</p>
+                        <input type="file" id="cpUpload" accept=".pdf" style="display: none;">
+                    </div>
+                    <p id="fileName" style="text-align: center;"></p>
+                </div>
+                
+                <button class="btn" style="width: 100%;" onclick="generateDocuments()">Generate Dokumen</button>
+            </div>
+            
+            <h3 style="margin-bottom: 1rem;">Dokumen yang Dihasilkan</h3>
+            <div class="document-list">
+                <div class="document-card">
+                    <div class="document-icon">📘</div>
+                    <h4>Modul Ajar</h4>
+                    <p>Dokumen lengkap modul ajar</p>
+                    <button class="btn btn-outline" onclick="downloadDocument('Modul Ajar')">Download</button>
+                </div>
+                
+                <div class="document-card">
+                    <div class="document-icon">🎯</div>
+                    <h4>Tujuan Pembelajaran</h4>
+                    <p>Rincian tujuan pembelajaran</p>
+                    <button class="btn btn-outline" onclick="downloadDocument('Tujuan Pembelajaran')">Download</button>
+                </div>
+                
+                <div class="document-card">
+                    <div class="document-icon">📊</div>
+                    <h4>Alur Tujuan Pembelajaran</h4>
+                    <p>Alur dan sequencing pembelajaran</p>
+                    <button class="btn btn-outline" onclick="downloadDocument('Alur Tujuan Pembelajaran')">Download</button>
+                </div>
+                
+                <div class="document-card">
+                    <div class="document-icon">✅</div>
+                    <h4>Indikator Pencapaian</h4>
+                    <p>Indikator keberhasilan belajar</p>
+                    <button class="btn btn-outline" onclick="downloadDocument('Indikator Pencapaian')">Download</button>
+                </div>
+                
+                <div class="document-card">
+                    <div class="document-icon">📅</div>
+                    <h4>Program Semester</h4>
+                    <p>Rencana program semester</p>
+                    <button class="btn btn-outline" onclick="downloadDocument('Program Semester')">Download</button>
+                </div>
+                
+                <div class="document-card">
+                    <div class="document-icon">📆</div>
+                    <h4>Program Tahunan</h4>
+                    <p>Rencana program tahunan</p>
+                    <button class="btn btn-outline" onclick="downloadDocument('Program Tahunan')">Download</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 GenModul - Generator Modul Ajar untuk Guru</p>
+            <p>Email: support@genmodul.id | Telp: (021) 1234-5678</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simulasi fungsi login dan generate
+        let currentUserType = '';
+        let currentLevel = 'sd';
+        let generatedDocuments = false;
+        let selectedPackage = '';
+        
+        function selectLevel(level) {
+            currentLevel = level;
+            const levelCards = document.querySelectorAll('.level-card');
+            levelCards.forEach(card => card.style.transform = 'translateY(0)');
+            event.currentTarget.style.transform = 'translateY(-5px)';
+            
+            // Update badge color based on level
+            const badge = document.getElementById('userLevelBadge');
+            badge.className = 'level-badge ';
+            
+            if (level === 'sd') {
+                badge.classList.add('badge-sd');
+                badge.textContent = 'SD';
+            } else if (level === 'smp') {
+                badge.classList.add('badge-smp');
+                badge.textContent = 'SMP';
+            } else if (level === 'sma') {
+                badge.classList.add('badge-sma');
+                badge.textContent = 'SMA';
+            }
+        }
+        
+        function showLoginForm(userType) {
+            currentUserType = userType;
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('formTitle').textContent = userType === 'premium' ? 
+                'Login Akun Premium' : 'Login Akun Trial';
+            
+            if (userType === 'trial') {
+                document.getElementById('upgradeOption').classList.remove('hidden');
+            } else {
+                document.getElementById('upgradeOption').classList.add('hidden');
+            }
+            
+            // Scroll to form
+            document.getElementById('loginForm').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function simulateGoogleLogin() {
+            // Simulasi login Google
+            const userName = "Guru Contoh";
+            document.getElementById('userName').textContent = userName;
+            
+            // Tampilkan dashboard
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            
+            // Tampilkan status user
+            if (currentUserType === 'premium') {
+                document.getElementById('userStatus').classList.remove('hidden');
+                document.getElementById('trialStatus').classList.add('hidden');
+            } else {
+                document.getElementById('userStatus').classList.add('hidden');
+                document.getElementById('trialStatus').classList.remove('hidden');
+            }
+            
+            // Set level pendidikan
+            document.getElementById('educationLevel').value = currentLevel;
+            updateClassOptions();
+            
+            // Scroll to dashboard
+            document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function selectPackage(packageType) {
+            selectedPackage = packageType;
+            let packageName = '';
+            let price = '';
+            
+            switch(packageType) {
+                case 'monthly':
+                    packageName = 'Bulanan (Rp 16.000/bulan)';
+                    price = '16000';
+                    break;
+                case 'quarterly':
+                    packageName = '3 Bulan (Rp 45.000/3 bulan)';
+                    price = '45000';
+                    break;
+                case 'semester':
+                    packageName = 'Semester (Rp 90.000/semester)';
+                    price = '90000';
+                    break;
+            }
+            
+            alert(`Anda memilih paket: ${packageName}. Anda akan diarahkan ke halaman pembayaran.`);
+            // Di sini akan diarahkan ke halaman pembayaran eksternal
+            simulatePayment(price);
+        }
+        
+        function simulatePayment(amount) {
+            // Simulasi pembayaran
+            alert(`Sedang mengarahkan ke halaman pembayaran untuk jumlah Rp ${amount}...`);
+            
+            // Simulasi pembayaran berhasil setelah 2 detik
+            setTimeout(function() {
+                alert('Pembayaran berhasil! Akun Anda sekarang telah upgrade ke premium.');
+                document.getElementById('userStatus').classList.remove('hidden');
+                document.getElementById('trialStatus').classList.add('hidden');
+                currentUserType = 'premium';
+            }, 2000);
+        }
+        
+        function updateClassOptions() {
+            const level = document.getElementById('educationLevel').value;
+            const classSelect = document.getElementById('class');
+            
+            // Clear existing options
+            classSelect.innerHTML = '<option value="">Pilih Kelas</option>';
+            
+            // Add options based on level
+            if (level === 'sd') {
+                for (let i = 1; i <= 6; i++) {
+                    classSelect.innerHTML += `<option value="${i}">Kelas ${i}</option>`;
+                }
+            } else if (level === 'smp') {
+                for (let i = 7; i <= 9; i++) {
+                    classSelect.innerHTML += `<option value="${i}">Kelas ${i}</option>`;
+                }
+            } else if (level === 'sma') {
+                for (let i = 10; i <= 12; i++) {
+                    classSelect.innerHTML += `<option value="${i}">Kelas ${i}</option>`;
+                }
+            }
+        }
+        
+        // Setup file upload
+        document.getElementById('fileUploadArea').addEventListener('click', function() {
+            document.getElementById('cpUpload').click();
+        });
+        
+        document.getElementById('cpUpload').addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                document.getElementById('fileName').textContent = 'File terpilih: ' + e.target.files[0].name;
+            }
+        });
+        
+        function generateDocuments() {
+            // Validasi form
+            const schoolName = document.getElementById('schoolName').value;
+            const teacherName = document.getElementById('teacherName').value;
+            const classSelected = document.getElementById('class').value;
+            const semester = document.getElementById('semester').value;
+            const subject = document.getElementById('subject').value;
+            const file = document.getElementById('cpUpload').files[0];
+            
+            if (!schoolName || !teacherName || !classSelected || !semester || !subject || !file) {
+                alert('Harap isi semua field dan upload file Capaian Pembelajaran!');
+                return;
+            }
+            
+            // Simulasi proses generate
+            alert('Dokumen sedang diproses... Sistem sedang menganalisis Capaian Pembelajaran dan menghasilkan modul ajar lengkap.');
+            
+            // Simulasi integrasi dengan AI Gemini
+            setTimeout(function() {
+                generatedDocuments = true;
+                alert('Proses generate selesai! Sekarang Anda dapat mendownload dokumen yang dihasilkan.');
+            }, 3000);
+        }
+        
+        function downloadDocument(docType) {
+            if (!generatedDocuments) {
+                alert('Harap generate dokumen terlebih dahulu sebelum mendownload.');
+                return;
+            }
+            
+            if (currentUserType !== 'premium') {
+                alert('Fitur download hanya tersedia untuk akun premium. Silakan upgrade akun Anda.');
+                return;
+            }
+            
+            alert(`Memulai download ${docType} dalam format PDF...`);
+            // Dalam implementasi nyata, ini akan mengunduh file yang sebenarnya
+        }
+    </script>
+</body>
+</html>
